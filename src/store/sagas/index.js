@@ -9,7 +9,7 @@ import { getTeams, createTeam } from './teams';
 import { TeamsTypes } from '../ducks/teams';
 
 // eslint-disable-next-line import/no-cycle
-import { getProjects } from './projects';
+import { getProjects, createProject } from './projects';
 import { ProjectsTypes } from '../ducks/projects';
 
 export default function* rootSaga() {
@@ -22,5 +22,6 @@ export default function* rootSaga() {
 
     takeLatest(TeamsTypes.SELECT_TEAM, getProjects),
     takeLatest(ProjectsTypes.GET_PROJECTS_REQUEST, getProjects),
+    takeLatest(ProjectsTypes.CREATE_PROJECT_REQUEST, createProject),
   ]);
 }
