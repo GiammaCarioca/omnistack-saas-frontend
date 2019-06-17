@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TeamsActions from '~/store/ducks/teams';
+import AuthActions from '~/store/ducks/auth';
 
 import Button from '~/styles/components/Button';
 import Modal from '~/components/Modal';
 
 import {
-  Container, TeamList, Team, NewTeam,
+  Container, TeamList, Team, NewTeam, Logout,
 } from './styles';
 
 class TeamSwitcher extends Component {
@@ -19,6 +20,7 @@ class TeamSwitcher extends Component {
     openTeamModal: PropTypes.func.isRequired,
     closeTeamModal: PropTypes.func.isRequired,
     createTeamRequest: PropTypes.func.isRequired,
+    signOut: PropTypes.func.isRequired,
     teams: PropTypes.shape({
       data: PropTypes.arrayOf(
         PropTypes.shape({
@@ -59,7 +61,9 @@ class TeamSwitcher extends Component {
   };
 
   render() {
-    const { teams, openTeamModal, closeTeamModal } = this.props;
+    const {
+      teams, openTeamModal, closeTeamModal, signOut,
+    } = this.props;
     const { newTeam } = this.state;
 
     return (
@@ -73,26 +77,29 @@ class TeamSwitcher extends Component {
               />
             </Team>
           ))}
+          
+          <NewTeam onClick={openTeamModal}>NOVO</NewTeam>
+
+          { teams.teamModalOpen && (
+            <Modal>
+              <h1>Criar Time</h1>
+
+              <form onSubmit={this.handleCreateTeam}>
+                <span>NOME</span>
+                <input name="newTeam" value={newTeam} onChange={(this.handleInputChange)} />
+
+                <Button type="submit" size="big">
+                  Salvar
+                </Button>
+                <Button onClick={closeTeamModal} size="small" color="gray">
+                  Cancelar
+                </Button>
+              </form>
+            </Modal>
+          )}
         </TeamList>
-        <NewTeam onClick={openTeamModal}>NOVO</NewTeam>
 
-        { teams.teamModalOpen && (
-          <Modal>
-            <h1>Criar Time</h1>
-
-            <form onSubmit={this.handleCreateTeam}>
-              <span>NOME</span>
-              <input name="newTeam" value={newTeam} onChange={(this.handleInputChange)} />
-
-              <Button type="submit" size="big">
-                Salvar
-              </Button>
-              <Button onClick={closeTeamModal} size="small" color="gray">
-                Cancelar
-              </Button>
-            </form>
-          </Modal>
-        )}
+        <Logout onClick={signOut}>SAIR</Logout>
       </Container>
     );
   }
@@ -102,7 +109,9 @@ const mapStateToProps = state => ({
   teams: state.teams,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(TeamsActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(
+  { ...TeamsActions, ...AuthActions }, dispatch,
+);
 
 export default connect(
   mapStateToProps,
