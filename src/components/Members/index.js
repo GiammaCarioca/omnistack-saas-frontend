@@ -12,7 +12,6 @@ import Can from '~/components/Can';
 import Modal from '~/components/Modal';
 import { MembersList, Invite } from './styles';
 import Button from '~/styles/components/Button';
-// import { Container } from './styles';
 
 class Members extends Component {
   static propTypes = {

@@ -77,7 +77,7 @@ class TeamSwitcher extends Component {
               />
             </Team>
           ))}
-          
+
           <NewTeam onClick={openTeamModal}>NOVO</NewTeam>
 
           { teams.teamModalOpen && (

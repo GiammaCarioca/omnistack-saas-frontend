@@ -12,7 +12,7 @@ class SignIn extends Component {
   static propTypes = {
     signInRequest: PropTypes.func.isRequired,
   };
-   
+
   state = {
     email: '',
     password: '',

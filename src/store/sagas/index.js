@@ -1,22 +1,16 @@
-import { all, fork, takeLatest } from 'redux-saga/effects';
+import { all, fork, takeLatest } from "redux-saga/effects";
 
-// eslint-disable-next-line import/no-cycle
-import {
-  signIn, signOut, signUp, getPermissions,
-} from './auth';
-import { AuthTypes } from '../ducks/auth';
+import { signIn, signOut, signUp, getPermissions } from "./auth";
+import { AuthTypes } from "../ducks/auth";
 
-// eslint-disable-next-line import/no-cycle
-import { getTeams, createTeam } from './teams';
-import { TeamsTypes } from '../ducks/teams';
+import { getTeams, createTeam } from "./teams";
+import { TeamsTypes } from "../ducks/teams";
 
-// eslint-disable-next-line import/no-cycle
-import { getProjects, createProject } from './projects';
-import { ProjectsTypes } from '../ducks/projects';
+import { getProjects, createProject } from "./projects";
+import { ProjectsTypes } from "../ducks/projects";
 
-// eslint-disable-next-line import/no-cycle
-import { getMembers, updateMember, inviteMember } from './members';
-import { MembersTypes } from '../ducks/members';
+import { getMembers, updateMember, inviteMember } from "./members";
+import { MembersTypes } from "../ducks/members";
 
 export default function* rootSaga() {
   return yield all([
@@ -36,6 +30,6 @@ export default function* rootSaga() {
 
     takeLatest(MembersTypes.GET_MEMBERS_REQUEST, getMembers),
     takeLatest(MembersTypes.UPDATE_MEMBER_REQUEST, updateMember),
-    takeLatest(MembersTypes.INVITE_MEMBER_REQUEST, inviteMember),
+    takeLatest(MembersTypes.INVITE_MEMBER_REQUEST, inviteMember)
   ]);
 }

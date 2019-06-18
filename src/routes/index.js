@@ -14,8 +14,8 @@ import SignIn from '~/pages/Auth/SignIn';
 const Routes = () => (
   <ConnectedRouter history={history}>
     <Switch>
-      <Guest path="/signin" component={SignIn} />
-      <Guest path="/signup" component={SignUp} />
+      <Guest path="/signin" render={props => <SignIn {...props} />} />
+      <Guest path="/signup" render={props => <SignUp {...props} />} />
       <Private path="/" component={Main} />
     </Switch>
   </ConnectedRouter>

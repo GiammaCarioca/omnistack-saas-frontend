@@ -1,12 +1,11 @@
-import axios from 'axios';
-// eslint-disable-next-line import/no-cycle
-import store from '~/store';
+import axios from "axios";
+import store from "~/store";
 
 const api = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: "http://localhost:3333"
 });
 
-api.interceptors.request.use((config) => {
+api.interceptors.request.use(config => {
   const { token } = store.getState().auth;
   const { active: team } = store.getState().teams;
 

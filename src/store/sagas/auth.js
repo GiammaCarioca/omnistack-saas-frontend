@@ -1,54 +1,53 @@
-import { call, put, select } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
-import { actions as toastrActions } from 'react-redux-toastr';
-// eslint-disable-next-line import/no-cycle
-import api from '~/services/api';
+import { call, put, select } from "redux-saga/effects";
+import { push } from "connected-react-router";
+import { actions as toastrActions } from "react-redux-toastr";
+import api from "~/services/api";
 
-import AuthActions from '../ducks/auth';
+import AuthActions from "../ducks/auth";
 
 export function* signIn({ email, password }) {
   try {
-    const response = yield call(api.post, 'sessions', { email, password });
+    const response = yield call(api.post, "sessions", { email, password });
 
-    localStorage.setItem('@Omni:token', response.data.token);
+    localStorage.setItem("@Omni:token", response.data.token);
 
     yield put(AuthActions.signInSuccess(response.data.token));
-    yield put(push('/'));
+    yield put(push("/"));
   } catch (err) {
     yield put(
       toastrActions.add({
-        type: 'error',
-        title: 'Falha no login',
-        message: 'Verifique seu e-mail/senha!',
-      }),
+        type: "error",
+        title: "Falha no login",
+        message: "Verifique seu e-mail/senha!"
+      })
     );
   }
 }
 
 export function* signUp({ name, email, password }) {
   try {
-    const response = yield call(api.post, 'users', { name, email, password });
+    const response = yield call(api.post, "users", { name, email, password });
 
-    localStorage.setItem('@Omni:token', response.data.token);
+    localStorage.setItem("@Omni:token", response.data.token);
 
     yield put(AuthActions.signInSuccess(response.data.token));
-    yield put(push('/'));
+    yield put(push("/"));
   } catch (err) {
     yield put(
       toastrActions.add({
-        type: 'error',
-        title: 'Falha no cadastro',
-        message: 'Você foi convidado para algum time?',
-      }),
+        type: "error",
+        title: "Falha no cadastro",
+        message: "Você foi convidado para algum time?"
+      })
     );
   }
 }
 
 export function* signOut() {
-  localStorage.removeItem('@Omni:token');
-  localStorage.removeItem('@Omni:team');
+  localStorage.removeItem("@Omni:token");
+  localStorage.removeItem("@Omni:team");
 
-  yield put(push('/signin'));
+  yield put(push("/signin"));
 }
 
 export function* getPermissions() {
@@ -57,7 +56,7 @@ export function* getPermissions() {
 
   if (!signedIn || !team) return;
 
-  const response = yield call(api.get, 'permissions');
+  const response = yield call(api.get, "permissions");
 
   const { roles, permissions } = response.data;
 

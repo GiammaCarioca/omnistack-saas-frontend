@@ -12,7 +12,7 @@ class SignUp extends Component {
   static propTypes = {
     signUpRequest: PropTypes.func.isRequired,
   };
-   
+
   state = {
     name: '',
     email: '',

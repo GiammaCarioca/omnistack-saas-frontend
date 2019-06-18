@@ -17,13 +17,14 @@ const GuestRoute = ({ component: Component, ...rest }) => (
 );
 
 GuestRoute.propTypes = {
-  component: PropTypes.func.isRequired,
+  component: PropTypes.func,
   location: PropTypes.shape({
     key: PropTypes.string,
   }),
 };
 
 GuestRoute.defaultProps = {
+  component: null,
   location: null,
 };
 

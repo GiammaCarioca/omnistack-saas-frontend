@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Container, Content } from './styles';
+import { Container, Content } from "./styles";
 
 const Modal = ({ children, size }) => (
   <Container>
@@ -10,13 +10,15 @@ const Modal = ({ children, size }) => (
 );
 
 Modal.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
-    .isRequired,
-  size: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ]).isRequired,
+  size: PropTypes.string
 };
 
 Modal.defaultProps = {
-  size: 'default',
+  size: "default"
 };
 
 export default Modal;
